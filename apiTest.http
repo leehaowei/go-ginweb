@@ -1,0 +1,5 @@
+###
+POST {{server}}/login
+content-type: application/x-www-form-urlencoded
+
+uid=koma&pwd=12345678!&rememberMe=2
