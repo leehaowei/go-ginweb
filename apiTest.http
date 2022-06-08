@@ -1,5 +1,6 @@
 ###
 POST {{server}}/login
 content-type: application/x-www-form-urlencoded
+Authorization: token 1234567890abcde
 
 uid=koma&pwd=12345678!&rememberMe=2

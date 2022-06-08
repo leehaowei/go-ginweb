@@ -22,9 +22,10 @@ func main() {
 
 	router.POST("/login", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"uid":        c.PostForm("uid"),
-			"pwd":        c.PostForm("pwd"),
-			"rememberMe": c.DefaultPostForm("rememberMe", "0"),
+			"uid":           c.PostForm("uid"),
+			"pwd":           c.PostForm("pwd"),
+			"rememberMe":    c.DefaultPostForm("rememberMe", "0"),
+			"Authorization": c.GetHeader("Authorization"),
 		})
 	})
 
