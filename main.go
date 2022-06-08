@@ -12,8 +12,8 @@ func index(c *gin.Context) {
 }
 
 type uriNewsBinding struct {
-	Region   string `uri:"region" binding:"required"`
-	Category string `uri:"category" binding:"required"`
+	Region   string `json:"region" binding:"required"`
+	Category string `json:"category" binding:"required"`
 }
 
 func main() {
@@ -25,10 +25,10 @@ func main() {
 
 	router.GET("/", index) // handler for root
 
-	router.GET("news/:region/:category", func(c *gin.Context) {
+	router.POST("/news", func(c *gin.Context) {
 		var binding uriNewsBinding
 
-		if err := c.ShouldBindUri(&binding); err != nil {
+		if err := c.ShouldBindJSON(&binding); err != nil {
 			c.String(http.StatusBadRequest, err.Error())
 			return
 		}

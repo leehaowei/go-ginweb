@@ -1,6 +1,8 @@
 ###
-POST {{server}}/login
-content-type: application/x-www-form-urlencoded
-Authorization: token 1234567890abcde
+POST {{server}}/news
+content-type: application/json
 
-uid=koma&pwd=12345678!&rememberMe=2
+{
+  "region": "ap-northeast-1",
+  "category": "ec2"
+}
