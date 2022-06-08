@@ -11,6 +11,11 @@ func index(c *gin.Context) {
 	})
 }
 
+type uriNewsBinding struct {
+	Region   string `uri:"region" binding:"required"`
+	Category string `uri:"category" binding:"required"`
+}
+
 func main() {
 	//gin.SetMode(gin.ReleaseMode)
 	//gin.SetMode(gin.DebugMode)
@@ -20,12 +25,17 @@ func main() {
 
 	router.GET("/", index) // handler for root
 
-	router.POST("/login", func(c *gin.Context) {
+	router.GET("news/:region/:category", func(c *gin.Context) {
+		var binding uriNewsBinding
+
+		if err := c.ShouldBindUri(&binding); err != nil {
+			c.String(http.StatusBadRequest, err.Error())
+			return
+		}
+
 		c.JSON(http.StatusOK, gin.H{
-			"uid":           c.PostForm("uid"),
-			"pwd":           c.PostForm("pwd"),
-			"rememberMe":    c.DefaultPostForm("rememberMe", "0"),
-			"Authorization": c.GetHeader("Authorization"),
+			"region":   binding.Region,
+			"category": binding.Category,
 		})
 	})
 
