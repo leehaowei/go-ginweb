@@ -1,8 +1,10 @@
 ###
-POST {{server}}/news
+POST {{server}}/users
 content-type: application/json
 
 {
-  "region": "ap-northeast-1",
-  "category": "ec2"
+  "name": "frankfurt",
+  "password": "1234567a!",
+  "email": "aaaabbbccceiam@gmail.com",
+  "role": "USER"
 }
