@@ -1,8 +1,8 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func main() {
@@ -10,14 +10,14 @@ func main() {
 	var router = gin.Default()
 	var port = ":8080"
 
-	router.LoadHTMLGlob("./templates/*")
-
-	router.GET("/profile", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "profile.html", gin.H{
-			"name": "frankfurt",
-			"role": "ADMIN",
-			"age":  25,
-		})
+	router.Use(func(c *gin.Context) {
+		token := c.GetHeader("Token")
+		if len(token) == 0 {
+			c.Writer.Header().Add("Token", "abcde.12345.XYZ")
+		} else {
+			c.Writer.Header().Add("Token", token+"-ABC")
+		}
+		fmt.Println("> access logging...")
 	})
 
 	router.StaticFile("/", "./static/index.html")

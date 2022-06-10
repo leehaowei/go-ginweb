@@ -1,10 +1,6 @@
 ###
-POST {{server}}/users
-content-type: application/json
+GET {{server}}/
 
-{
-  "name": "frankfurt",
-  "password": "1234567a!",
-  "email": "aaaabbbccceiam@gmail.com",
-  "role": "USER"
-}
+###
+GET {{server}}/
+Token: jwt.1234567890.xyz
